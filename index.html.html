@@ -1,0 +1,335 @@
+<!DOCTYPE html> <!-- Declara para o navegador que este é um documento HTML5 moderno e válido -->
+<html lang="pt-BR" class="dark"> <!-- Define o idioma como Português do Brasil e ativa o tema escuro como padrão -->
+
+<head> <!-- Seção de cabeçalho contendo metadados, links externos e estilização global -->
+    <meta charset="UTF-8"> <!-- Define a codificação de caracteres UTF-8 para exibir corretalmente acentos e ç -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Torna a página responsiva para celulares, tablets e computadores -->
+    <title>Sabrina Programa - Landing Page</title> <!-- Define o título que aparece na aba do navegador -->
+
+    <!-- Carrega a biblioteca Tailwind CSS via CDN para aplicar classes utilitárias de estilização rápida -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Configuração do Tailwind CSS com cores personalizadas inspiradas em programação e tecnologia -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class', // Permite alternar entre tema claro e escuro adicionando uma classe 'dark' no HTML
+            theme: {
+                extend: {
+                    colors: {
+                        // Cores personalizadas no estilo Cyberpunk/Code Neon
+                        dev: {
+                            purple: '#A855F7',   // Roxo vibrante para destaques de código
+                            cyan: '#06B6D4',     // Ciano neon para acentuções
+                            blue: '#3B82F6',     // Azul para elementos de interface
+                            darkBg: '#090D16',   // Fundo azul/preto super escuro
+                            cardBg: '#111827'    // Fundo escuro para os cartões
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Carrega os ícones das redes sociais através da biblioteca FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        /* Importa a fonte moderna 'Inter' do Google Fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@300;400;600;700;800&display=swap');
+
+        /* Regras globais para o corpo da página */
+        body {
+            font-family: 'Inter', sans-serif; /* Define a fonte padrão de leitura */
+            overflow-x: hidden; /* Oculta barras de rolagem horizontais caso haja transbordamento */
+        }
+
+        /* Estilização para blocos com efeito de código */
+        .code-font {
+            font-family: 'Fira Code', monospace; /* Fonte estilo terminal para elementos técnicos */
+        }
+
+        /* 1. EFEITO DE ONDA COLORIDA NO TÍTULO PRINCIPAL (WAVE GRADIENT) */
+        .wave-text-gradient {
+            /* Cria um gradiente contínuo com tons de roxo, azul e ciano */
+            background: linear-gradient(90deg, #a855f7, #3b82f6, #06b6d4, #3b82f6, #a855f7);
+            background-size: 200% auto; /* Expande o tamanho do fundo para permitir movimento continuo */
+            -webkit-background-clip: text; /* Aplica o fundo gradiente exclusivamente dentro do contorno das letras */
+            -webkit-text-fill-color: transparent; /* Torna o interior das letras transparente para ver o gradiente */
+            animation: waveMotion 4s linear infinite; /* Aplica a animação que move o gradiente para sempre */
+        }
+
+        /* Regra de Animação Keyframes para movimentar o gradiente */
+        @keyframes waveMotion {
+            0% { background-position: 0% center; } /* Posição inicial da luz na esquerda */
+            100% { background-position: 200% center; } /* Movimenta a luz suavemente para a direita */
+        }
+
+        /* Animação de flutuação suave para o título e ícone */
+        @keyframes floatUpAndDown {
+            0%, 100% { transform: translateY(0px); } /* Posição normal */
+            50% { transform: translateY(-10px); } /* Sobe 10 pixels no ar */
+        }
+
+        .wave-float {
+            animation: floatUpAndDown 4s ease-in-out infinite; /* Executa a animação de flutuação continuamente */
+        }
+
+        /* 2. EFEITOS INTERATIVOS DOS ÍCONES SOCIAIS NO RODAPÉ */
+        .social-btn {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Animação suave com mola ao passar o mouse */
+        }
+
+        /* Efeito Hover do Facebook */
+        .social-facebook:hover {
+            color: #1877F2; /* Aplica a cor azul oficial do Facebook */
+            transform: translateY(-8px) scale(1.2); /* Eleva o ícone para cima e o aumenta em 20% */
+            filter: drop-shadow(0 0 15px rgba(24, 119, 242, 0.9)); /* Adiciona um brilho neon azul ao redor do ícone */
+        }
+
+        /* Efeito Hover do TikTok */
+        .social-tiktok:hover {
+            color: #00F2FE; /* Aplica a cor ciano vibrante do TikTok */
+            transform: translateY(-8px) scale(1.2); /* Eleva o ícone para cima e o aumenta em 20% */
+            filter: drop-shadow(0 0 15px rgba(0, 242, 254, 0.9)); /* Adiciona um brilho neon ciano ao redor do ícone */
+        }
+
+        /* Efeito Hover do Instagram */
+        .social-instagram:hover {
+            color: #E1306C; /* Aplica a cor rosa oficial do Instagram */
+            transform: translateY(-8px) scale(1.2); /* Eleva o ícone para cima e o aumenta em 20% */
+            filter: drop-shadow(0 0 15px rgba(225, 48, 108, 0.9)); /* Adiciona um brilho neon rosa ao redor do ícone */
+        }
+    </style> <!-- Fim das regras de estilos CSS -->
+</head> <!-- Fim do cabeçalho da página -->
+
+<body class="bg-dev-darkBg text-slate-100 min-h-screen flex flex-col justify-between selection:bg-dev-cyan selection:text-black"> <!-- Define fundo escuro e cores básicas -->
+
+    <!-- BARRA DE NAVEGAÇÃO SUPERIOR -->
+    <nav class="w-full py-6 px-6 border-b border-slate-800/80 bg-slate-950/50 backdrop-blur-md fixed top-0 left-0 z-50"> <!-- Barra fixa no topo com desfoque -->
+        <div class="max-w-7xl mx-auto flex items-center justify-between"> <!-- Alinha logo e detalhes nas extremidades -->
+            <a href="#" class="flex items-center gap-2 font-bold text-lg tracking-tight"> <!-- Logotipo no canto esquerdo -->
+                <span class="text-dev-cyan code-font">&lt;</span> <!-- Sinal de menor em azul ciano -->
+                <span class="text-white">Sabrina</span> <!-- Nome em branco -->
+                <span class="text-dev-purple">.programa()</span> <!-- Método em roxo -->
+                <span class="text-dev-cyan code-font">&gt;</span> <!-- Sinal de maior em azul ciano -->
+            </a> <!-- Fim do logotipo -->
+
+            <div class="hidden sm:flex items-center gap-3 text-xs font-semibold uppercase tracking-wider text-slate-400"> <!-- Indicador do lado direito -->
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping"></span> <!-- Ponto verde piscante simulando status online -->
+                <span>Desenvolvimento Fullstack</span> <!-- Rótulo descritivo -->
+            </div> <!-- Fim do indicador -->
+        </div> <!-- Fim da caixa da navegação -->
+    </nav> <!-- Fim da barra de navegação -->
+
+    <!-- SEÇÃO HERO PRINCIPAL CENTRALIZADA COM EFEITO DE ONDA -->
+    <header class="relative pt-36 pb-16 px-4 text-center flex flex-col items-center justify-center overflow-hidden"> <!-- Seção centralizada -->
+        
+        <!-- Luzes esféricas neon desfocadas ao fundo para criar profundidade de designer -->
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[30rem] h-[30rem] bg-dev-purple/20 rounded-full blur-[120px] -z-10 pointer-events-none"></div> <!-- Luz roxa de fundo -->
+        <div class="absolute top-1/3 left-1/2 -translate-x-1/2 w-[20rem] h-[20rem] bg-dev-cyan/20 rounded-full blur-[100px] -z-10 pointer-events-none"></div> <!-- Luz ciano central -->
+
+        <!-- Ícone decorativo flutuante acima do título -->
+        <div class="wave-float mb-4 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900/80 border border-dev-purple/40 text-dev-purple text-xs font-bold uppercase tracking-widest shadow-xl backdrop-blur-md">
+            <i class="fa-solid fa-code text-dev-cyan"></i> <!-- Ícone de código -->
+            <span>Portfólio & Tecnologia</span> <!-- Texto do selo -->
+        </div>
+
+        <!-- TÍTULO PRINCIPAL CENTRALIZADO "SABRINA PROGRAMA" COM EFEITO ONDA -->
+        <h1 class="text-5xl sm:text-7xl md:text-8xl font-black tracking-tight wave-text-gradient mb-6 max-w-5xl leading-tight"> <!-- Texto responsivo gigante -->
+            Sabrina programa <!-- Título pedido pelo usuário com onda colorida -->
+        </h1> <!-- Fim do título centralizado -->
+
+        <!-- Subtítulo explicativo -->
+        <p class="text-slate-300 text-base sm:text-xl max-w-2xl mx-auto font-light leading-relaxed mb-8"> <!-- Parágrafo de apoio -->
+            Transformando ideias complexas em experiências digitais elegantes através do desenvolvimento Fullstack e Design moderno. <!-- Descrição -->
+        </p> <!-- Fim do subtítulo -->
+
+        <!-- Elemento de onda decorativa em vetor SVG abaixo do texto -->
+        <div class="w-48 h-3 mx-auto opacity-70">
+            <svg viewBox="0 0 1200 120" preserveAspectRatio="none" class="w-full h-full fill-none stroke-dev-cyan stroke-2">
+                <path d="M0,0 C150,90 350,-40 500,40 C650,120 900,-20 1200,40"></path> <!-- Linha curva simulando onda tecnológica -->
+            </svg>
+        </div>
+    </header> <!-- Fim do cabeçalho principal -->
+
+    <!-- SEÇÃO PRINCIPAL: GRADE DE 6 CARDS EM 2 LINHAS (3 COLUNAS X 2 LINHAS NO DESKTOP) -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full flex-grow"> <!-- Restringe a largura central do conteúdo -->
+        
+        <!-- Título da seção dos cartões -->
+        <div class="text-center mb-12">
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">Projetos & Tecnologias</h2> <!-- Título da galeria -->
+            <p class="text-slate-400 text-sm sm:text-base mt-2">Passe o mouse sobre as imagens para visualizar o efeito de zoom interativo.</p> <!-- Instrução do hover zoom -->
+        </div>
+
+        <!-- GRADE COM 6 CARDS ORGANIZADOS EM 2 LINHAS (3 COLUNAS X 2 LINHAS) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"> <!-- Grid responsiva: 1 coluna no celular, 2 no tablet e 3 no desktop -->
+
+            <!-- CARD 1 (Linha 1, Coluna 1) -->
+            <div class="group bg-dev-cardBg border border-slate-800 rounded-2xl overflow-hidden shadow-xl hover:border-dev-purple/60 transition-all duration-300 hover:shadow-2xl hover:shadow-dev-purple/10 flex flex-col"> <!-- Container do cartão 1 -->
+                <div class="h-56 overflow-hidden relative"> <!-- Div restritiva com overflow-hidden para travar o zoom da foto dentro da caixa -->
+                    <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80" alt="Código de Programação Web" class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-110" onerror="this.src='https://placehold.co/600x400/111827/ffffff?text=Desenvolvimento+Web'"> <!-- Imagem com efeito hover zoom scale-110 -->
+                    <div class="absolute inset-0 bg-gradient-to-t from-dev-cardBg via-transparent to-transparent opacity-80"></div> <!-- Camada de sombra para destacar o texto -->
+                </div> <!-- Fim da div da imagem -->
+                <div class="p-6 flex flex-col flex-grow justify-between"> <!-- Conteúdo de texto do cartão -->
+                    <div>
+                        <span class="text-dev-cyan text-xs font-semibold uppercase tracking-wider">Frontend Moderno</span> <!-- Categoria -->
+                        <h3 class="text-xl font-bold text-white mt-1 group-hover:text-dev-purple transition-colors">Desenvolvimento Web</h3> <!-- Título -->
+                        <p class="text-slate-400 text-sm mt-2 leading-relaxed">Criação de interfaces reativas e responsivas utilizando HTML, CSS, JavaScript e frameworks modernos.</p> <!-- Descrição -->
+                    </div>
+                </div>
+            </div> <!-- Fim do Card 1 -->
+
+            <!-- CARD 2 (Linha 1, Coluna 2) -->
+            <div class="group bg-dev-cardBg border border-slate-800 rounded-2xl overflow-hidden shadow-xl hover:border-dev-cyan/60 transition-all duration-300 hover:shadow-2xl hover:shadow-dev-cyan/10 flex flex-col"> <!-- Container do cartão 2 -->
+                <div class="h-56 overflow-hidden relative"> <!-- Div com overflow hidden -->
+                    <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=800&q=80" alt="Segurança e Backend" class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-110" onerror="this.src='https://placehold.co/600x400/111827/ffffff?text=Backend+Arquitetura'"> <!-- Imagem com efeito de zoom no hover -->
+                    <div class="absolute inset-0 bg-gradient-to-t from-dev-cardBg via-transparent to-transparent opacity-80"></div> <!-- Sombra no fundo -->
+                </div>
+                <div class="p-6 flex flex-col flex-grow justify-between"> <!-- Texto -->
+                    <div>
+                        <span class="text-dev-purple text-xs font-semibold uppercase tracking-wider">Arquitetura Backend</span>
+                        <h3 class="text-xl font-bold text-white mt-1 group-hover:text-dev-cyan transition-colors">Sistemas & APIs</h3>
+                        <p class="text-slate-400 text-sm mt-2 leading-relaxed">Construção de servidores rápidos e banco de dados seguros com integrações de serviços de alta disponibilidade.</p>
+                    </div>
+                </div>
+            </div> <!-- Fim do Card 2 -->
+
+            <!-- CARD 3 (Linha 1, Coluna 3) -->
+            <div class="group bg-dev-cardBg border border-slate-800 rounded-2xl overflow-hidden shadow-xl hover:border-dev-blue/60 transition-all duration-300 hover:shadow-2xl hover:shadow-dev-blue/10 flex flex-col"> <!-- Container do cartão 3 -->
+                <div class="h-56 overflow-hidden relative">
+                    <img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=800&q=80" alt="UI e UX Designer" class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-110" onerror="this.src='https://placehold.co/600x400/111827/ffffff?text=UI+UX+Design'"> <!-- Imagem com efeito de zoom no hover -->
+                    <div class="absolute inset-0 bg-gradient-to-t from-dev-cardBg via-transparent to-transparent opacity-80"></div>
+                </div>
+                <div class="p-6 flex flex-col flex-grow justify-between">
+                    <div>
+                        <span class="text-dev-blue text-xs font-semibold uppercase tracking-wider">Design de Interfaces</span>
+                        <h3 class="text-xl font-bold text-white mt-1 group-hover:text-dev-purple transition-colors">UI / UX Prototipagem</h3>
+                        <p class="text-slate-400 text-sm mt-2 leading-relaxed">Planejamento visual focado na experiência do usuário com protótipos funcionais e estéticos.</p>
+                    </div>
+                </div>
+            </div> <!-- Fim do Card 3 -->
+
+            <!-- CARD 4 (Linha 2, Coluna 1) -->
+            <div class="group bg-dev-cardBg border border-slate-800 rounded-2xl overflow-hidden shadow-xl hover:border-dev-purple/60 transition-all duration-300 hover:shadow-2xl hover:shadow-dev-purple/10 flex flex-col"> <!-- Container do cartão 4 -->
+                <div class="h-56 overflow-hidden relative">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80" alt="Análise de Dados e Dashboards" class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-110" onerror="this.src='https://placehold.co/600x400/111827/ffffff?text=Dashboards+e+Dados'"> <!-- Imagem com efeito de zoom no hover -->
+                    <div class="absolute inset-0 bg-gradient-to-t from-dev-cardBg via-transparent to-transparent opacity-80"></div>
+                </div>
+                <div class="p-6 flex flex-col flex-grow justify-between">
+                    <div>
+                        <span class="text-dev-cyan text-xs font-semibold uppercase tracking-wider">Engenharia de Dados</span>
+                        <h3 class="text-xl font-bold text-white mt-1 group-hover:text-dev-purple transition-colors">Dashboards Interativos</h3>
+                        <p class="text-slate-400 text-sm mt-2 leading-relaxed">Visualização de métricas e relatórios gráficos dinâmicos para tomada de decisões estratégicas.</p>
+                    </div>
+                </div>
+            </div> <!-- Fim do Card 4 -->
+
+            <!-- CARD 5 (Linha 2, Coluna 2) -->
+            <div class="group bg-dev-cardBg border border-slate-800 rounded-2xl overflow-hidden shadow-xl hover:border-dev-cyan/60 transition-all duration-300 hover:shadow-2xl hover:shadow-dev-cyan/10 flex flex-col"> <!-- Container do cartão 5 -->
+                <div class="h-56 overflow-hidden relative">
+                    <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=800&q=80" alt="Aplicativos Mobile" class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-110" onerror="this.src='https://placehold.co/600x400/111827/ffffff?text=Aplicativos+Mobile'"> <!-- Imagem com efeito de zoom no hover -->
+                    <div class="absolute inset-0 bg-gradient-to-t from-dev-cardBg via-transparent to-transparent opacity-80"></div>
+                </div>
+                <div class="p-6 flex flex-col flex-grow justify-between">
+                    <div>
+                        <span class="text-dev-purple text-xs font-semibold uppercase tracking-wider">Dispositivos Móveis</span>
+                        <h3 class="text-xl font-bold text-white mt-1 group-hover:text-dev-cyan transition-colors">Aplicativos Mobile</h3>
+                        <p class="text-slate-400 text-sm mt-2 leading-relaxed">Desenvolvimento de soluções multiplataforma nativas para smartphones Android e iOS.</p>
+                    </div>
+                </div>
+            </div> <!-- Fim do Card 5 -->
+
+            <!-- CARD 6 (Linha 2, Coluna 3) -->
+            <div class="group bg-dev-cardBg border border-slate-800 rounded-2xl overflow-hidden shadow-xl hover:border-dev-blue/60 transition-all duration-300 hover:shadow-2xl hover:shadow-dev-blue/10 flex flex-col"> <!-- Container do cartão 6 -->
+                <div class="h-56 overflow-hidden relative">
+                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80" alt="Inteligência Artificial e Código" class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-110" onerror="this.src='https://placehold.co/600x400/111827/ffffff?text=Inteligencia+Artificial'"> <!-- Imagem com efeito de zoom no hover -->
+                    <div class="absolute inset-0 bg-gradient-to-t from-dev-cardBg via-transparent to-transparent opacity-80"></div>
+                </div>
+                <div class="p-6 flex flex-col flex-grow justify-between">
+                    <div>
+                        <span class="text-dev-blue text-xs font-semibold uppercase tracking-wider">Inovação & IA</span>
+                        <h3 class="text-xl font-bold text-white mt-1 group-hover:text-dev-purple transition-colors">Integração com IA</h3>
+                        <p class="text-slate-400 text-sm mt-2 leading-relaxed">Implementação de inteligência artificial generativa e automação de processos inteligentes.</p>
+                    </div>
+                </div>
+            </div> <!-- Fim do Card 6 -->
+
+        </div> <!-- Fim da grade de 6 cartões -->
+    </main> <!-- Fim do conteúdo principal -->
+
+    <!-- RODAPÉ DA PÁGINA (FOOTER) COM ÍCONES DAS REDES SOCIAIS E EFEITO GLOW -->
+    <footer class="bg-slate-950 border-t border-slate-800/80 py-12 px-4 text-center relative z-20 backdrop-blur-md mt-16"> <!-- Container do rodapé -->
+        <div class="max-w-7xl mx-auto flex flex-col items-center justify-between gap-6 md:flex-row"> <!-- Layout responsivo em linha ou coluna -->
+            
+            <!-- Créditos do Desenvolvedor -->
+            <div class="text-center md:text-left">
+                <p class="text-white font-bold text-base">Sabrina Programa &copy; <span id="current-year"></span></p> <!-- Ano atual automático -->
+                <p class="text-slate-500 text-xs mt-1">Todos os direitos reservados. Projetado com carinho e código limpo.</p> <!-- Subtítulo de créditos -->
+            </div>
+
+            <!-- CONJUNTO DE ÍCONES SOCIAIS PEDIDOS: FACEBOOK, TIKTOK E INSTAGRAM COM EFEITO DE BRILHO/GLOW -->
+            <div class="flex items-center space-x-8 text-3xl"> <!-- Espaçamento entre os ícones -->
+                
+                <!-- Ícone do Facebook com efeito Hover Neon Azul -->
+                <a href="#" aria-label="Acessar perfil do Facebook" class="social-btn social-facebook text-slate-400" onclick="handleSocialClick(event, 'Facebook')">
+                    <i class="fa-brands fa-facebook"></i> <!-- Ícone do Facebook -->
+                </a> <!-- Fim do botão Facebook -->
+
+                <!-- Ícone do TikTok com efeito Hover Neon Ciano -->
+                <a href="#" aria-label="Acessar perfil do TikTok" class="social-btn social-tiktok text-slate-400" onclick="handleSocialClick(event, 'TikTok')">
+                    <i class="fa-brands fa-tiktok"></i> <!-- Ícone do TikTok -->
+                </a> <!-- Fim do botão TikTok -->
+
+                <!-- Ícone do Instagram com efeito Hover Neon Rosa -->
+                <a href="#" aria-label="Acessar perfil do Instagram" class="social-btn social-instagram text-slate-400" onclick="handleSocialClick(event, 'Instagram')">
+                    <i class="fa-brands fa-instagram"></i> <!-- Ícone do Instagram -->
+                </a> <!-- Fim do botão Instagram -->
+
+            </div> <!-- Fim dos ícones sociais -->
+
+        </div> <!-- Fim do contêiner interno do rodapé -->
+    </footer> <!-- Fim do rodapé -->
+
+    <!-- CAIXA DE NOTIFICAÇÃO ESTILO TOAST (AVISO INTERATIVO AO CLICAR EM UMA REDE SOCIAL) -->
+    <div id="toast-message" class="fixed bottom-6 right-6 bg-slate-900 border border-dev-purple/50 text-white px-6 py-4 rounded-xl shadow-2xl opacity-0 pointer-events-none transition-all duration-300 flex items-center gap-3 z-50 transform translate-y-6 backdrop-blur-md">
+        <i class="fa-solid fa-circle-check text-dev-cyan text-xl"></i> <!-- Ícone de confirmação -->
+        <span id="toast-text" class="text-sm font-medium">Redirecionando para a rede social...</span> <!-- Texto alterado via JS -->
+    </div> <!-- Fim do Toast -->
+
+    <!-- LÓGICA EM JAVASCRIPT COM EXPLICAÇÕES DETALHADAS PARA LEIGOS EM PROGRAMAÇÃO -->
+    <script>
+        // Aguarda a leitura completa de todo o documento HTML antes de iniciar os scripts
+        document.addEventListener('DOMContentLoaded', function () {
+            
+            // 1. ATUALIZAÇÃO AUTOMÁTICA DO ANO NO RODAPÉ
+            const yearSpan = document.getElementById('current-year'); // Procura o elemento HTML com id 'current-year'
+            if (yearSpan) { // Se o elemento for encontrado na página
+                yearSpan.textContent = new Date().getFullYear(); // Insere o ano atual do computador do visitante (ex: 2026)
+            }
+        });
+
+        // 2. FUNÇÃO QUE EXIBE A NOTIFICAÇÃO AO CLICAR NAS REDES SOCIAIS
+        function handleSocialClick(event, platformName) {
+            event.preventDefault(); // Impede o navegador de pular para o topo da página ao clicar no link de demonstração
+
+            const toast = document.getElementById('toast-message'); // Localiza a caixa de notificação toast
+            const toastText = document.getElementById('toast-text'); // Localiza o texto dentro da notificação
+
+            // Altera o texto para mostrar o nome da rede social clicada pelo usuário
+            toastText.textContent = `Você clicou no link do ${platformName} de Sabrina Programa!`;
+
+            // Revela a notificação na tela ajustando as classes visuais CSS
+            toast.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-6');
+            toast.classList.add('opacity-100', 'translate-y-0');
+
+            // Agenda o ocultamento automático da notificação após 3 segundos (3000 milissegundos)
+            setTimeout(function () {
+                toast.classList.remove('opacity-100', 'translate-y-0');
+                toast.classList.add('opacity-0', 'pointer-events-none', 'translate-y-6');
+            }, 3000);
+        }
+    </script> <!-- Fim do script de controle -->
+
+</body> <!-- Fim do corpo do documento -->
+
+</html> <!-- Fim do documento HTML -->
